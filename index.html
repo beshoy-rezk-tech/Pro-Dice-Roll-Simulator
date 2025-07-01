@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Dice Roll Simulator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+</head>
+<body>
+  <canvas id="bg-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></canvas>
+  <header>
+    <h1>Pro Dice Roll Simulator</h1>
+    <p class="subtitle">The most stylish and feature-rich dice roller on the web</p>
+    <button id="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
+  </header>
+
+  <main>
+    <section class="controls">
+      <div class="control-group">
+        <div class="dice-type-selector">
+          <label for="dice-type">Dice Type:</label>
+          <select id="dice-type">
+            <option value="4">D4</option>
+            <option value="6" selected>D6</option>
+            <option value="8">D8</option>
+            <option value="10">D10</option>
+            <option value="12">D12</option>
+            <option value="20">D20</option>
+          </select>
+        </div>
+        <div class="dice-count-selector">
+          <label for="dice-count">Number of Dice:</label>
+          <input type="number" id="dice-count" min="1" max="10" value="1">
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="control-group">
+        <div class="theme-selector">
+          <label for="theme-select">Theme:</label>
+          <select id="theme-select">
+            <option value="default" selected>Default</option>
+            <option value="retro">Retro</option>
+            <option value="neon">Neon</option>
+            <option value="wood">Wood</option>
+            <option value="casino">Casino</option>
+          </select>
+        </div>
+        <div class="dice-color-selector">
+          <label for="dice-color">Dice Color:</label>
+          <div class="dice-color-row">
+            <span id="dice-color-swatch" class="dice-swatch"></span>
+            <input type="color" id="dice-color" value="#6366f1" title="Pick dice color">
+          </div>
+          <div class="dice-preset-row">
+            <button class="dice-preset" data-color="#6366f1" style="background:#6366f1"></button>
+            <button class="dice-preset" data-color="#06b6d4" style="background:#06b6d4"></button>
+            <button class="dice-preset" data-color="#f59e42" style="background:#f59e42"></button>
+            <button class="dice-preset" data-color="#10b981" style="background:#10b981"></button>
+            <button class="dice-preset" data-color="#f43f5e" style="background:#f43f5e"></button>
+            <button class="dice-preset" data-color="#a21caf" style="background:#a21caf"></button>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="control-group actions">
+        <button id="roll-btn" class="primary">Roll Dice 🎲</button>
+        <button id="lucky-roll-btn" class="primary" title="Lucky Roll">Lucky Roll 🍀</button>
+      </div>
+    </section>
+
+    <section class="dice-display" aria-live="polite">
+      <!-- Dice SVGs or images will be rendered here -->
+    </section>
+
+    <section class="result-section">
+      <div class="result">
+        <span id="result-label">Result:</span>
+        <span id="result-value">-</span>
+        <button id="copy-result" aria-label="Copy result to clipboard">📋</button>
+      </div>
+      <div class="statistics">
+        <span>Average: <span id="avg-value">-</span></span>
+        <span>Highest: <span id="high-value">-</span></span>
+        <span>Lowest: <span id="low-value">-</span></span>
+      </div>
+    </section>
+
+    <section class="history-section">
+      <h2>Roll History</h2>
+      <ul id="roll-history">
+        <!-- Roll history items will appear here -->
+      </ul>
+    </section>
+  </main>
+
+  <audio id="roll-sound" src="roll.mp3" preload="auto"></audio>
+
+  <footer>
+    <p>Made with ❤️ for dice lovers. &copy; 2024</p>
+    <p>Made by <a href="https://github.com/beshoy-rezk-tech" target="_blank">beshoy rezk</a></p>
+</footer>
+<script src="script.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('service-worker.js');
+    });
+  }
+</script>
+</body>
+</html>
